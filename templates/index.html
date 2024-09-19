@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Steganography - LSB</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Steganography - LSB</h1>
+        <form action="/encrypt" method="POST" enctype="multipart/form-data">
+            <label for="image">Upload Image:</label>
+            <input type="file" name="image" required>
+            <label for="message">Message to hide:</label>
+            <input type="text" name="message">
+            <button type="submit">Encrypt</button>
+        </form>
+        
+        <form action="/decrypt" method="POST" enctype="multipart/form-data">
+            <label for="image">Upload Image:</label>
+            <input type="file" name="image" required>
+            <label for="message">Compare Message (optional):</label>
+            <input type="text" name="message">
+            <button type="submit">Decrypt</button>
+        </form>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
